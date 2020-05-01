@@ -1,4 +1,5 @@
 /**
+ * ********************************************************
 [info] Initialization
 npm init
 npm install express
@@ -26,9 +27,9 @@ npm install nodemon --save-dev
 .html files
 css, img, js, vendor, etc.
 
-*****************************************
+**************************************************************
 Website should work from here
-*****************************************
+**************************************************************
 
 [info] Should serve files with specific routes using 'app.get'
 
@@ -45,8 +46,6 @@ HTML when browser asks.
 #10 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'pages/index.html'))
 })
-
-
 
 
 *************************************************************
@@ -89,7 +88,10 @@ into new files: 'header.ejs', 'navbar.ejs', 'footer.ejs', and 'scripts.ejs'
 <% - include('layouts/navbar') %>
 <% - include('layouts/scripts') %>
 
-**************************
+
+*************************************************************
+Using MongoDB and Mongoose
+*************************************************************
 Download MongoDB Stable release
 Download Mongo Compass Community edition
 
@@ -104,4 +106,35 @@ mongoose.connect('mongodb://localhost/my_database', {useNewUrlParser: true})
 [info] Define a model
 #3 Create 'models' folder in root directory
 #4 In 'models' create 'BlogPost.js'
+
+#5 +BlogPost.js
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
+
+const BlogPostSchema = new Schema({
+    title: String,
+    body: String
+})
+
+// Access the database via mongoose.model()
+[info] Use singular; Mongoose will create BlogPosts <--
+const BlogPost = mongoose.model('BlogPost', BlogPostSchema)
+module.exports = BlogPost
+
+
+
+**********************************************************************
+CRUD (Create, Read, Update, Delete) operations via Mongoose
+**********************************************************************
+
+[indo] Create test file in root directory: 'text.js'
+#1 +text.js
+const mongoose = require('mongoose')
+const BlogPost = require('./models/BlogPost')
+mongoose.connect('mongodb://localhost/my_database', {useNewUrlParser: true})
+
+BlogPost.create({
+    title: "The Mythbusters Guide to the Galaxy",
+    body: "If you have been here a while you might want to wait a little longer."
+})
 */
