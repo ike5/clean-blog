@@ -131,10 +131,68 @@ CRUD (Create, Read, Update, Delete) operations via Mongoose
 #1 +text.js
 const mongoose = require('mongoose')
 const BlogPost = require('./models/BlogPost')
-mongoose.connect('mongodb://localhost/my_database', {useNewUrlParser: true})
+mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true })
 
 BlogPost.create({
     title: "The Mythbusters Guide to the Galaxy",
     body: "If you have been here a while you might want to wait a little longer."
+}, (error, blogpost) => {
+    console.log(error, blogpost)
 })
+
+// ***********************************************************************
+// Reading Data from MongoDB using Mongoose
+// ***********************************************************************
+
+[info] Select all documents
+[info] Pass empty document as query (in first argument) in [find] method:
+
+BlogPost.find({}, (error, blogpost) => {
+    console.log(error, blogpost)
+})
+
+
+[info] Select all with specific title
+BlogPost.find({
+    title: 'Harry Potter'
+}, (error, blogpost) => {
+    console.log(error, blogpost)
+})
+
+[info] Select all with 'The' in title
+BlogPost.find({
+    title: /The/
+}, (error, blogpost) => {
+    console.log(error, blogpost)
+})
+
+[info] in SQL '/' acts as '%' wildcard
+
+[info] Find specific post by id
+var id = "laskdjflkj32l3jrl23kj23";
+BlogPost.findById(id, (error, blogpost) => {
+    console.log(error, blogpost)
+})
+
+// ***********************************************************************
+// Updating Records from MongoDB using Mongoose
+// ***********************************************************************
+[info] Update Record
+var id = "laksdjlfkaj2232"
+BlogPost.findByIdAndUpdate(id, {
+    title: "Blah updated title record"
+}, (error, blogpost) => {
+    console.log(error, blogpost)
+})
+
+// ***********************************************************************
+// Delete Single Record from MongoDB using Mongoose
+// ***********************************************************************
+
+[info] Delete Single record
+var id = "laksjdkflas"
+BlogPost.findByIdAndDelete(id, (error, blogpost) => {
+    console.log(error, blogpost)
+})
+
 */
