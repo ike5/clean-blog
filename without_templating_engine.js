@@ -82,4 +82,12 @@ app.get('/', (req, res) => { // #A5
 
 #8 Extract <head>, <nav>, <footer>, and <script> HTML from index.ejs
 into new files: 'header.ejs', 'navbar.ejs', 'footer.ejs', and 'scripts.ejs'
+
+#9 In place of extracted sections use:
+<% - include('layouts/header') %>
+<% - include('layouts/footer') %>
+<% - include('layouts/navbar') %>
+<% - include('layouts/scripts') %>
+
+
 */
