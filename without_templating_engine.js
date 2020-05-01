@@ -1,4 +1,3 @@
-
 /**
 [info] Initialization
 npm init
@@ -12,7 +11,7 @@ npm install nodemon --save-dev
 
 
 #1 Create index.js file
-#2 const express = require('express') 
+#2 const express = require('express')
 #3 const app = new express()
 
 #4 app.listen(PORT, () => {
@@ -25,7 +24,7 @@ npm install nodemon --save-dev
 
 #6 Serve all static assets from 'public' folder. Move all:
 .html files
-css, img, js, vendor, etc. 
+css, img, js, vendor, etc.
 
 *****************************************
 Website should work from here
@@ -46,4 +45,28 @@ HTML when browser asks.
 #10 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'pages/index.html'))
 })
+
+
+
+
+*************************************************************
+Templating Engines EJS
+*************************************************************
+
+#1 npm install ejs --save
+
+#2 +index.js under const app
+const ejs = require('ejs')
+app.set('view engine', 'ejs')
+
+[info] Send/respond views to user via res.render('index'). Will 
+look in a 'views' folder for file called 'index.ejs'.
+
+#3 app.get('/', (req, res) => { // #A5 
+    res.render('index') // #B3
+})
+
+#4 Rename 'pages' root folder to 'views'
+
+#5 Remanme 'index.html' extention to 'index.ejs'
 */

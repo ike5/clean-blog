@@ -1,32 +1,34 @@
-const express = require('express') // #1
+const express = require('express') // #A1
 const path = require('path') // 
 
-const app = new express() // #2
-app.use(express.static('public')) // #4
+const app = new express() // #A2
+const ejs = require('ejs') // #B1
+app.set('view engine', 'ejs') // #B2
+app.use(express.static('public')) // #A4
 
 const PORT = 4000
-app.listen(PORT, () => { // #3
+app.listen(PORT, () => { // #A3
     console.log(`App listening on port ${PORT}`)
 })
 
 
-app.get('/', (req, res) => { // #5
+app.get('/', (req, res) => { // #A5
+    res.render('index')  // #B3
+})
+
+app.get('/index', (req, res) => { // #A6
     res.sendFile(path.resolve(__dirname, 'pages/index.html'))
 })
 
-app.get('/index', (req, res) => { // #6
-    res.sendFile(path.resolve(__dirname, 'pages/index.html'))
-})
-
-app.get('/about', (req, res) => { // #7
+app.get('/about', (req, res) => { // #A7
     res.sendFile(path.resolve(__dirname, 'pages/about.html'))
 })
 
-app.get('/contact', (req, res) => { // #8
+app.get('/contact', (req, res) => { // #A8
     res.sendFile(path.resolve(__dirname, 'pages/contact.html'))
 })
 
-app.get('/post', (req, res) => { // #9
+app.get('/post', (req, res) => { // #A9
     res.sendFile(path.resolve(__dirname, 'pages/post.html'))
 })
 
