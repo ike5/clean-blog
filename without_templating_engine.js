@@ -67,7 +67,7 @@ app.get('/', (req, res) => { // #A5
     res.render('index') // #B3
 })
 
-#4 Fix app.get for about, contact, post
+#4 Render app.get as above for: about, contact, and post
 
 #5 Rename 'pages' root folder to 'views'
 
@@ -77,4 +77,9 @@ app.get('/', (req, res) => { // #A5
 'contact.html' extension to 'contact.ejs'
 'post.html' extension to 'post.ejs'
 
+
+#7 Create subfolder 'layouts' inside 'views' folder
+
+#8 Extract <head>, <nav>, <footer>, and <script> HTML from index.ejs
+into new files: 'header.ejs', 'navbar.ejs', 'footer.ejs', and 'scripts.ejs'
 */
