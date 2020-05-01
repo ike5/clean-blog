@@ -6,6 +6,9 @@ const ejs = require('ejs') // #B1
 app.set('view engine', 'ejs') // #B2
 app.use(express.static('public')) // #A4
 
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true }) //it doesn't matter what I put!
+
 const PORT = 4000
 app.listen(PORT, () => { // #A3
     console.log(`App listening on port ${PORT}`)
@@ -31,22 +34,3 @@ app.get('/contact', (req, res) => { // #A8
 app.get('/post', (req, res) => { // #A9
     res.render('post')
 })
-
-// Do I need an extra get for about and about.html? Yes unless 
-// you change the href links in index.html
-
-// app.get('/index.html', (req, res) => { // #6
-//     res.sendFile(path.resolve(__dirname, 'pages/index.html'))
-// })
-
-// app.get('/about.html', (req, res) => { // #7
-//     res.sendFile(path.resolve(__dirname, 'pages/about.html'))
-// })
-
-// app.get('/contact.html', (req, res) => { // #8
-//     res.sendFile(path.resolve(__dirname, 'pages/contact.html'))
-// })
-
-// app.get('/post.html', (req, res) => { // #9
-//     res.sendFile(path.resolve(__dirname, 'pages/post.html'))
-// })

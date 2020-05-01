@@ -59,11 +59,11 @@ Templating Engines EJS
 const ejs = require('ejs')
 app.set('view engine', 'ejs')
 
-[info] Send/respond views to user via res.render('index'). Will 
+[info] Send/respond views to user via res.render('index'). Will
 look in a 'views' folder for file called 'index.ejs'.
 
 #3 Replace res.sendFile() with res.render()
-app.get('/', (req, res) => { // #A5 
+app.get('/', (req, res) => { // #A5
     res.render('index') // #B3
 })
 
@@ -83,11 +83,25 @@ app.get('/', (req, res) => { // #A5
 #8 Extract <head>, <nav>, <footer>, and <script> HTML from index.ejs
 into new files: 'header.ejs', 'navbar.ejs', 'footer.ejs', and 'scripts.ejs'
 
-#9 In place of extracted sections use:
+#9 In place of extracted sections use: (path relative to template)
 <% - include('layouts/header') %>
 <% - include('layouts/footer') %>
 <% - include('layouts/navbar') %>
 <% - include('layouts/scripts') %>
 
+**************************
+Download MongoDB Stable release
+Download Mongo Compass Community edition
 
+[info] Install Mongoose to talk to MongoDB from Node
+#1 npm install mongoose
+
+#2 +index.js
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/my_database', {useNewUrlParser: true})
+
+
+[info] Define a model
+#3 Create 'models' folder in root directory
+#4 In 'models' create 'BlogPost.js'
 */
