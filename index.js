@@ -17,19 +17,19 @@ app.get('/', (req, res) => { // #A5
 })
 
 app.get('/index', (req, res) => { // #A6
-    res.sendFile(path.resolve(__dirname, 'pages/index.html'))
+    res.render('index')
 })
 
 app.get('/about', (req, res) => { // #A7
-    res.sendFile(path.resolve(__dirname, 'pages/about.html'))
+    res.render('about')
 })
 
 app.get('/contact', (req, res) => { // #A8
-    res.sendFile(path.resolve(__dirname, 'pages/contact.html'))
+    res.render('contact')
 })
 
 app.get('/post', (req, res) => { // #A9
-    res.sendFile(path.resolve(__dirname, 'pages/post.html'))
+    res.render('post')
 })
 
 // Do I need an extra get for about and about.html? Yes unless 

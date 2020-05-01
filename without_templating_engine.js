@@ -62,11 +62,19 @@ app.set('view engine', 'ejs')
 [info] Send/respond views to user via res.render('index'). Will 
 look in a 'views' folder for file called 'index.ejs'.
 
-#3 app.get('/', (req, res) => { // #A5 
+#3 Replace res.sendFile() with res.render()
+app.get('/', (req, res) => { // #A5 
     res.render('index') // #B3
 })
 
-#4 Rename 'pages' root folder to 'views'
+#4 Fix app.get for about, contact, post
 
-#5 Remanme 'index.html' extention to 'index.ejs'
+#5 Rename 'pages' root folder to 'views'
+
+#6 Rename:
+'index.html' extention to 'index.ejs'
+'about.html' extension to 'about.ejs'
+'contact.html' extension to 'contact.ejs'
+'post.html' extension to 'post.ejs'
+
 */
