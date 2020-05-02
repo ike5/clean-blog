@@ -48,6 +48,7 @@ const BlogPost = require('./models/BlogPost')
 
 app.post('/posts/store', (req, res) => {
     BlogPost.create(req.body, (error, blogpost) => {
+        console.log(error, blogpost)
         res.redirect('/')
     })
 })
