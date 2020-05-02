@@ -222,7 +222,17 @@ app.get('/posts/new', (req, res) => {
 href="/blah/route/blash"
 
 #7 Adjust forms to POST
-<form action="/posts/store" metho="POST">
+<form action="/posts/store" method="POST">
+
+DO NOT FORGET TO ADD name="title" to input
+ <div class="control-group">
+    <div class="form-group floating-label-form-group controls">
+        <label>Title</label>
+        <input type="text" class="form-control" placeholder="Title" id="title" name="title" required
+                data-validation-required-message="Please enter a title.">
+        <p class="help-block text-danger"></p>
+        </div>
+    </div>
 
 
 
@@ -241,4 +251,22 @@ npm install body-parser
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
+
+
+
+
+****************************************************
+Saving Posts to the Database
+****************************************************
+
+#1 +index.js
+...
+const BlogPost = require('./models/BlogPost')
+...
+app.post('/posts/store', (req, res) => {
+    BlogPost.create(req.body, (error, blogpost) => {
+        res.redirect('/')
+    })
+})
 */

@@ -9,6 +9,10 @@ app.use(express.static('public')) // #A4
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true }) //it doesn't matter what I put!
 
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
 const PORT = 4000
 app.listen(PORT, () => { // #A3
     console.log(`App listening on port ${PORT}`)
@@ -39,11 +43,11 @@ app.get('/posts/new', (req, res) => {
     res.render('create')
 })
 
-app.post('/posts/store', (req, res) => {
-    console.log(req.body)
-    res.redirect('/')
-})
 
-const bodyParser = require('body-parser')
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+const BlogPost = require('./models/BlogPost')
+
+app.post('/posts/store', (req, res) => {
+    BlogPost.create(req.body, (error, blogpost) => {
+        res.redirect('/')
+    })
+})
