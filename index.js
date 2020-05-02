@@ -38,3 +38,12 @@ app.get('/post', (req, res) => { // #A9
 app.get('/posts/new', (req, res) => {
     res.render('create')
 })
+
+app.post('/posts/store', (req, res) => {
+    console.log(req.body)
+    res.redirect('/')
+})
+
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))

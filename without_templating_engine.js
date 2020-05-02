@@ -225,4 +225,20 @@ href="/blah/route/blash"
 <form action="/posts/store" metho="POST">
 
 
+
+[info] Handle the POST request
+#8 +index.js
+app.post('/posts/store', (req, res) => {
+    console.log(req.body)
+    res.redirect('/')
+})
+
+[info] Need to enable middleware body-parser for the above to parse from req.body
+#9 [info] Install body-parser
+npm install body-parser
+
+#10 +index.js
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 */
