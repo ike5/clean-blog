@@ -83,10 +83,10 @@ app.get('/', (req, res) => { // #A5
 into new files: 'header.ejs', 'navbar.ejs', 'footer.ejs', and 'scripts.ejs'
 
 #9 In place of extracted sections use: (path relative to template)
-<% - include('layouts/header') %>
-<% - include('layouts/footer') %>
-<% - include('layouts/navbar') %>
-<% - include('layouts/scripts') %>
+<%- include('layouts/header') %>
+<%- include('layouts/footer') %>
+<%- include('layouts/navbar') %>
+<%- include('layouts/scripts') %>
 
 
 *************************************************************
