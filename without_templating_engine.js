@@ -195,4 +195,21 @@ BlogPost.findByIdAndDelete(id, (error, blogpost) => {
     console.log(error, blogpost)
 })
 
+
+
+
+
+*********************************************************************
+Back to Business
+*********************************************************************
+
+#1 Create 'create.ejs' inside of 'views' folder
+#2 Copy contents of 'contact.ejs' to 'create.ejs'
+#3 Change <h1> of 'create.ejs' to say "Create New Post"
+
+[info] Register route for 'create.ejs'
+#4 +index.js
+app.get('/posts/new', (req, res) => {
+    res.render('create')
+})
 */
