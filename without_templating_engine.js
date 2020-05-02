@@ -269,4 +269,216 @@ app.post('/posts/store', (req, res) => {
         res.redirect('/')
     })
 })
+
+[info] Ensure that BlogPostSchema includes the actual names
+of the form fields.
+#2 Change BlogPostSchema in BlogPost.js --> remove 'body: String'
+and add 'description: String'
+
+
+
+
+*****************************************************
+Database stuff additional
+*****************************************************
+[info] Use asynchronous calls to avoid callback hell
+#1 Modify app.post to this: +index.js
+app.post('/posts/store', async (req, res) => {
+    await BlogPost.create(req.body)
+    res.redirect('/')
+})
+
+
+**************************
+Display List of Blog Posts
+**************************
+
+[info] Use BlogPost's find() method whenver homepage requested
+#1 Modify app.get('/') +index.js
+app.get('/', async (req, res) => {
+    const blogposts = await BlogPost.find({})
+    res.render('index', {
+        blogposts: blogposts
+    })
+})
+
+or alternatively (shorthand)
+
+app.get('/', async (req, res) => {
+    const blogposts = await BlogPost.find({})
+    res.render('index', {
+        blogposts
+    })
+    console.log(blogposts) -- to see all the stored blogposts
+})
+
+
+
+
+[info] Loop through posts to display via index.ejs
+#2 index.ejs
+    <% for(var i = 0; i < blogposts.length; i++){%> <----------
+        <div class="post-preview">
+          <h2 class="post-title">
+            <%= blogposts[i].title %>               <----------
+          </h2>
+
+          <h3 class="post-subtitle">
+            <%= blogposts[i].description %>         <----------
+          </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on September 24, 2019</p>
+        </div>
+        <hr>
+    <% } %>                                         <----------
+
+[info] how the above should look like in index.ejs
+<!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <% for(var i = 0; i < blogposts.length; i++){%>
+        <div class="post-preview">
+          <h2 class="post-title">
+            <%= blogposts[i].title %>
+          </h2>
+          <h3 class="post-subtitle">
+            <%= blogposts[i].description %>
+          </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on September 24, 2019</p>
+        </div>
+        <hr>
+        <% } %>
+
+        <!-- Pager -->
+        <div class="clearfix">
+          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+[info] Add href route of blogpost. (Get single pages for blogpost route)
+  <% for(var i = 0; i < blogposts.length; i++){%>
+        <div class="post-preview">
+          <a href="/post/<%= blogposts[i]._id %>">     <--------------------
+          ...
+          </a> (right before </div>)
+
+
+************************
+Search and display
+************************
+
+[info] Add this to search titles for /title/ (ex)
+BlogPost.find({
+    title: /title/
+}, (error, blogpost) => {
+    console.log(error, blogpost)
+})
+
+#1 Add the above to app.get() to form this:
+
+app.get('/', async (req, res) => {
+    const blogposts = await BlogPost.find({
+        title: /title/
+    }, (error, blogpost) => {
+        console.log(error, blogpost)
+    })
+    res.render('index', {
+        blogposts
+    })
+    console.log(blogposts)
+})
+
+**********************
+Single Blog Post Page
+**********************
+[info] change app.get('/post...) to:
+[info] :id parameter represents a wildcard
+#1 +index.js
+app.get('/post/:id', async(req, res) =>{
+    const blogpost = await BlogPost.findById(req.params.id)
+    res.render('post', {
+        blogpost
+    })
+})
+
+
+
+(ex) Print out the params object in route
+app.get('/post/:id', async (req, res) => {
+    console.log(req.params)
+})
+
+
+
+#2 Use findById with params and render it to 'post.ejs'
+app.get('/post/:id', async (req, res) => {
+    const blogpost = await BlogPost.findById(req.params.id)
+    res.render('post', {
+        blogpost
+    })
+})
+#3 +post.ejs  Add the following
+<div class="post-heading">
+    <h1>
+        <%= blogpost.title %>               <----------
+    </h1>
+    <h2 class="subheading">
+        <%= blogpost.description %>         <----------
+    </h2>
+        <span class="meta">Posted by<a href="#">Start Bootstrap</a> on August 24, 2019</span>
+</div>
+
+
+ <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <%= blogpost.description %>              <----------------
+        </div>
+      </div>
+    </div>
+  </article>
+
+
+
+******************************************************
+Adding Fileds to Schema
+******************************************************
+#1 +/models/BlogPost.js
+const BlogPostSchema = new Schema({
+    title: String,
+    description: String,
+    username: String,
+    datePosted: {   //can declare property type with an object
+                    //like this because we need the 'default' 
+        type: Date,
+        default: new Date()
+    }
+})
+
+[info] Add username and date
+#2 +index.ejs, +post.ejs
+ <p class="post-meta">Posted by
+    <a href="#"><%= blogposts[i].username %></a>
+    on <%= blogposts[i].datePosted.toDateString() %>
+</p>
+
+<span class="meta">Posted by
+    <a href="#"><%= blogpost.username %></a>
+    on <%= blogpost.datePosted.toDateString() %>
+</span>
+
+
+
+
 */
