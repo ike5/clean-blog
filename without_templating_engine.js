@@ -219,6 +219,10 @@ app.get('/posts/new', (req, res) => {
 </li>
 
 #6 Make sure all hrefs point to absolute references '/'
+href="/blah/route/blash"
+
+#7 Adjust forms to POST
+<form action="/posts/store" metho="POST">
 
 
 */
