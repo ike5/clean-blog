@@ -480,5 +480,32 @@ const BlogPostSchema = new Schema({
 
 
 
+********************
+Uploading Images
+********************
+#1 npm install express-fileupload --save
+#2 Add file upload field in post +create.ejs
+...
+<form action="/posts/store" method="POST" enctype="multipart/form-data" > (add enctype)
+...
+<div class="control-group">                                             <---add
+    <div class="form-group floating-label-form-group controls">         <---add
+        <label>Image</label>                                            <---add
+        <input type="file" name="image" id="image" class="form-control"><---add
+    </div>                                                              <---add
+</div>                                                                  <---add
 
+#3 +index.js 
+// add anywhere near top
+const fileUpload = require('express-fileupload')
+app.use(fileUpload())
+
+//modify previous app.post('/posts/store...)
+app.post('/posts/store', async (req, res) => {
+    let image = req.files.image
+    image.mv(path.resolve(__dirname, 'public/img', image.name), async (error) => {
+        await BlogPost.create(req.body)
+        res.redirect('/')
+    })
+})
 */

@@ -13,6 +13,10 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+
+const fileUpload = require('express-fileupload')
+app.use(fileUpload())
+
 const PORT = 4000
 app.listen(PORT, () => { // #A3
     console.log(`App listening on port ${PORT}`)
@@ -68,7 +72,10 @@ app.get('/posts/new', (req, res) => {
 const BlogPost = require('./models/BlogPost')
 
 app.post('/posts/store', async (req, res) => {
-    await BlogPost.create(req.body)
-    res.redirect('/')
+    let image = req.files.image
+    image.mv(path.resolve(__dirname, 'public/img', image.name), async (error) => {
+        await BlogPost.create(req.body)
+        res.redirect('/')
+    })
 })
 
