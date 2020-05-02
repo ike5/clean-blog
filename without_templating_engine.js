@@ -212,4 +212,13 @@ Back to Business
 app.get('/posts/new', (req, res) => {
     res.render('create')
 })
+
+#5 [info] Add 'New Post' list item to the navbar.ejs navigation
+<li class="nav-item">
+    <a class="nav-link" href="/posts/new">New Post</a>
+</li>
+
+#6 Make sure all hrefs point to absolute references '/'
+
+
 */
