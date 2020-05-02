@@ -19,25 +19,25 @@ app.listen(PORT, () => { // #A3
 })
 
 
-// app.get('/', async (req, res) => {
-//     const blogposts = await BlogPost.find({})
-//     res.render('index', {
-//         blogposts
-//     })
-//     console.log(blogposts)
-// })
-
 app.get('/', async (req, res) => {
-    const blogposts = await BlogPost.find({
-        title: /title/
-    }, (error, blogpost) => {
-        console.log(error, blogpost)
-    })
+    const blogposts = await BlogPost.find({})
     res.render('index', {
         blogposts
     })
     console.log(blogposts)
 })
+
+// app.get('/', async (req, res) => {
+//     const blogposts = await BlogPost.find({
+//         title: /title/
+//     }, (error, blogpost) => {
+//         console.log(error, blogpost)
+//     })
+//     res.render('index', {
+//         blogposts
+//     })
+//     console.log(blogposts)
+// })
 
 
 app.get('/index', (req, res) => { // #A6
