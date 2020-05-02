@@ -1,5 +1,7 @@
-/**
- * ********************************************************
+/*
+********************************************************
+Posting Website
+********************************************************
 [info] Initialization
 npm init
 npm install express
@@ -122,7 +124,6 @@ const BlogPost = mongoose.model('BlogPost', BlogPostSchema)
 module.exports = BlogPost
 
 
-
 **********************************************************************
 CRUD (Create, Read, Update, Delete) operations via Mongoose
 **********************************************************************
@@ -196,9 +197,6 @@ BlogPost.findByIdAndDelete(id, (error, blogpost) => {
 })
 
 
-
-
-
 *********************************************************************
 Back to Business
 *********************************************************************
@@ -235,7 +233,6 @@ DO NOT FORGET TO ADD name="title" to input
     </div>
 
 
-
 [info] Handle the POST request
 #8 +index.js
 app.post('/posts/store', (req, res) => {
@@ -251,9 +248,6 @@ npm install body-parser
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
-
-
 
 
 ****************************************************
@@ -276,8 +270,6 @@ of the form fields.
 and add 'description: String'
 
 
-
-
 *****************************************************
 Database stuff additional
 *****************************************************
@@ -287,7 +279,6 @@ app.post('/posts/store', async (req, res) => {
     await BlogPost.create(req.body)
     res.redirect('/')
 })
-
 
 **************************
 Display List of Blog Posts
@@ -311,8 +302,6 @@ app.get('/', async (req, res) => {
     })
     console.log(blogposts) -- to see all the stored blogposts
 })
-
-
 
 
 [info] Loop through posts to display via index.ejs
@@ -411,12 +400,10 @@ app.get('/post/:id', async(req, res) =>{
 })
 
 
-
 (ex) Print out the params object in route
 app.get('/post/:id', async (req, res) => {
     console.log(req.params)
 })
-
 
 
 #2 Use findById with params and render it to 'post.ejs'
@@ -449,8 +436,6 @@ app.get('/post/:id', async (req, res) => {
     </div>
   </article>
 
-
-
 ******************************************************
 Adding Fileds to Schema
 ******************************************************
@@ -477,8 +462,6 @@ const BlogPostSchema = new Schema({
     <a href="#"><%= blogpost.username %></a>
     on <%= blogpost.datePosted.toDateString() %>
 </span>
-
-
 
 ********************
 Uploading Images
@@ -509,7 +492,6 @@ app.post('/posts/store', async (req, res) => {
     })
 })
 
-
 **********************************
 Saving Uploaded images to Database
 **********************************
@@ -518,6 +500,7 @@ const BlogPostSchema = new Schema({
 ...
 image: String
 ...
+
 #2 +index.js
 app.post('/posts/store', async (req, res) => {
     let image = req.files.image
@@ -529,5 +512,4 @@ app.post('/posts/store', async (req, res) => {
         res.redirect('/')
     })
 })
-
 */
