@@ -508,4 +508,26 @@ app.post('/posts/store', async (req, res) => {
         res.redirect('/')
     })
 })
+
+
+**********************************
+Saving Uploaded images to Database
+**********************************
+#1 +BlogPost.js
+const BlogPostSchema = new Schema({
+...
+image: String
+...
+#2 +index.js
+app.post('/posts/store', async (req, res) => {
+    let image = req.files.image
+    image.mv(path.resolve(__dirname, 'public/img', image.name), async (error) => {
+        await BlogPost.create({
+            ...req.body,
+            image: '/img/' + image.name
+        })
+        res.redirect('/')
+    })
+})
+
 */
