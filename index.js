@@ -11,6 +11,7 @@ const homeController = require('./controllers/home')
 const storePostController = require('./controllers/storePost')
 const getPostController = require('./controllers/getPost')
 const newUserController = require('./controllers/newUser')
+const storeUserController = require('./controllers/storeUser')
 
 mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true })
 
@@ -29,5 +30,6 @@ app.get('/post/:id', getPostController)
 app.get('/auth/register', newUserController)
 
 app.post('/posts/store', storePostController)
+app.post('/users/register', storeUserController)
 
 app.listen(PORT, () => { console.log(`App listening on port ${PORT}`) })
