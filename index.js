@@ -10,6 +10,7 @@ const newPostController = require('./controllers/newPost')
 const homeController = require('./controllers/home')
 const storePostController = require('./controllers/storePost')
 const getPostController = require('./controllers/getPost')
+const newUserController = require('./controllers/newUser')
 
 mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true })
 
@@ -25,6 +26,7 @@ app.use('/posts/store', validateMiddleware)
 app.get('/posts/new', newPostController)
 app.get('/', homeController)
 app.get('/post/:id', getPostController)
+app.get('/auth/register', newUserController)
 
 app.post('/posts/store', storePostController)
 
