@@ -13,9 +13,25 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+const customMiddleware = (req, res, next) => {
+    console.log("Custom middleware called...")
+    next()
+}
+app.use(customMiddleware)
 
 const fileUpload = require('express-fileupload')
 app.use(fileUpload())
+
+const validateMiddleware = (req, res, next) => {
+    if(req.files == null || req.body.title == null || req.body.description == null){
+        console.log('Something went wrong...')
+        return res.redirect('/posts/new/')
+    }
+    next()
+}
+app.use('/posts/store/', validateMiddleware)
+
+
 
 const PORT = 4000
 app.listen(PORT, () => { // #A3
@@ -28,7 +44,7 @@ app.get('/', async (req, res) => {
     res.render('index', {
         blogposts
     })
-    console.log(blogposts)
+    // console.log(blogposts)
 })
 
 // app.get('/', async (req, res) => {
@@ -81,4 +97,12 @@ app.post('/posts/store', async (req, res) => {
         res.redirect('/')
     })
 })
+
+// app.post('/posts/store', async (req,res) =>{
+//     await BlogPost.create(req.body, (error, blogpost) =>{
+//         res.redirect('/posts/new')
+//     })
+// })
+
+
 
