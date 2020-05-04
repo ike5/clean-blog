@@ -1,0 +1,8 @@
+function rein() {
+    sudo apt update;
+    sudo apt install npm;
+    sudo apt update && sudo apt upgrade -y;
+    sudo npm install express;
+    sudo npm install mongoose;
+    sudo npm install;
+}
