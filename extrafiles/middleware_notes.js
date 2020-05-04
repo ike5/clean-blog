@@ -10,3 +10,8 @@ const validateMiddleware = (req, res, next) => {
 app.use('/posts/store/', validateMiddleware)
 
 
+const customMiddleware = (req, res, next) => {
+    console.log("Custom middleware called...")
+    next()
+}
+app.use(customMiddleware)
