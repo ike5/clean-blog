@@ -47,31 +47,6 @@ app.get('/', async (req, res) => {
     // console.log(blogposts)
 })
 
-// app.get('/', async (req, res) => {
-//     const blogposts = await BlogPost.find({
-//         title: /title/
-//     }, (error, blogpost) => {
-//         console.log(error, blogpost)
-//     })
-//     res.render('index', {
-//         blogposts
-//     })
-//     console.log(blogposts)
-// })
-
-
-app.get('/index', (req, res) => { // #A6
-    res.render('index')
-})
-
-app.get('/about', (req, res) => { // #A7
-    res.render('about')
-})
-
-app.get('/contact', (req, res) => { // #A8
-    res.render('contact')
-})
-
 app.get('/post/:id', async (req, res) => {
     const blogpost = await BlogPost.findById(req.params.id)
     res.render('post', {
@@ -80,9 +55,11 @@ app.get('/post/:id', async (req, res) => {
 })
 
 
-app.get('/posts/new', (req, res) => {
-    res.render('create')
-})
+const indexPageController = require('./controllers/indexPage')
+app.get('/index', indexPageController)
+
+const newPostController = require('./controllers/newPost')
+app.get('/posts/new', newPostController)
 
 
 const BlogPost = require('./models/BlogPost')
